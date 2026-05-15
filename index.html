@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priyal Sharma</title>
+<meta name="description" content="Co-founder of BYB. Builder at the intersection of tech and finance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #080808;
+  --fg:      #f0ede6;
+  --muted:   #787870;
+  --dim:     #3a3a36;
+  --accent:  #c9a96e;
+  --border:  #1c1c1a;
+  --surface: #0f0f0d;
+  --ff-d: 'Bebas Neue', sans-serif;
+  --ff-e: 'Playfair Display', serif;
+  --ff-b: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--ff-b);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* subtle grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.5;
+}
+
+/* ── NAV ─────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 3.5rem;
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+nav.scrolled {
+  background: rgba(8,8,8,0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.nav-logo {
+  font-family: var(--ff-e);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--fg);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+}
+.nav-links a {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--fg); }
+
+/* ── HERO ────────────────────────────── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3.5rem 3.5rem;
+  overflow: hidden;
+}
+
+.hero-name {
+  position: absolute;
+  top: 50%;
+  left: 3.5rem;
+  right: 3.5rem;
+  transform: translateY(-52%);
+  font-family: var(--ff-d);
+  font-size: clamp(5rem, 13vw, 13.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ← INSTRUCTION: Replace "YOUR FIRST" and "YOUR LAST" below with your actual name */
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-left { max-width: 380px; }
+
+.hero-role {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.9rem;
+}
+
+.hero-tagline {
+  font-family: var(--ff-e);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* rotating badge */
+.badge {
+  width: 110px;
+  height: 110px;
+  position: relative;
+  flex-shrink: 0;
+}
+.badge svg {
+  width: 100%;
+  height: 100%;
+  animation: spin 14s linear infinite;
+}
+.badge-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--fg);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* scroll line */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--dim));
+}
+
+/* ── SECTION BASE ────────────────────── */
+section {
+  padding: 6rem 3.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.sec-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.sec-label::after {
+  content: '';
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.sec-title {
+  font-family: var(--ff-e);
+  font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 3rem;
+}
+.sec-title em { font-style: italic; color: var(--muted); }
+
+/* ── ABOUT ───────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-photo {
+  aspect-ratio: 3/4;
+  background: var(--surface);
+  border: 1px solid var(--dim);
+  position: relative;
+  overflow: hidden;
+}
+.about-photo-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--dim);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
+.pull-quote {
+  font-family: var(--ff-e);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: var(--fg);
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.about-text p {
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+
+/* ── WORK ────────────────────────────── */
+.work-item {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 5rem;
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.work-company {
+  font-family: var(--ff-d);
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.work-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.work-body p {
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.85;
+  margin-bottom: 1rem;
+}
+
+.stats-row {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin: 1.75rem 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+.stat-num {
+  font-family: var(--ff-d);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--fg);
+}
+.stat-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+.ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  border: 1px solid var(--dim);
+  padding: 0.75rem 1.5rem;
+  margin-top: 0.5rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.ext-link:hover { border-color: var(--accent); color: var(--accent); }
+
+/* case study toggle */
+.case-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  padding: 0;
+  transition: color 0.2s;
+}
+.case-btn:hover { color: var(--fg); }
+.case-btn .arr { transition: transform 0.3s; display: inline-block; }
+.case-btn.open .arr { transform: rotate(90deg); }
+
+.case-wrap {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.65s cubic-bezier(0.4,0,0.2,1);
+}
+.case-wrap.open { max-height: 3000px; }
+
+.case-inner {
+  margin-top: 2rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 2.5rem;
+}
+.case-inner h3 {
+  font-family: var(--ff-e);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+.case-inner h3 em { font-style: italic; color: var(--muted); }
+.case-inner > p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.case-block h4 {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.case-block p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ── PHOTO STRIP ─────────────────────── */
+.strip-section {
+  padding: 0 3.5rem 5rem;
+  border-top: none;
+}
+.strip-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 1.5rem;
+}
+.photo-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.photo-ph {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: var(--dim);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  aspect-ratio: 3/4;
+  position: relative;
+  overflow: hidden;
+}
+.photo-ph:nth-child(even) { margin-top: -24px; }
+.photo-ph img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-ph-plus { font-size: 1.5rem; color: var(--border); line-height: 1; }
+
+/* ── JOURNEY ─────────────────────────── */
+.timeline {
+  position: relative;
+  padding-left: 2px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2.5rem;
+  padding: 2.25rem 0 2.25rem 3rem;
+  position: relative;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 2.7rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--bg);
+}
+
+.tl-year {
+  font-family: var(--ff-d);
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--dim);
+  padding-top: 0.15rem;
+}
+.tl-content h3 {
+  font-family: var(--ff-e);
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.tl-content p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.78;
+}
+
+/* ── BEYOND ──────────────────────────── */
+.beyond-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.beyond-card {
+  background: var(--bg);
+  padding: 2.5rem 2rem;
+  transition: background 0.3s;
+}
+.beyond-card:hover { background: var(--surface); }
+
+.beyond-num {
+  font-family: var(--ff-d);
+  font-size: 3.5rem;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+.beyond-title {
+  font-family: var(--ff-e);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+}
+.beyond-card p {
+  font-size: 0.87rem;
+  color: var(--muted);
+  line-height: 1.78;
+}
+
+/* ── CONTACT / FOOTER ────────────────── */
+.contact-section {
+  padding: 5rem 3.5rem;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.contact-left .big-line {
+  font-family: var(--ff-d);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.contact-left p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 340px;
+}
+.contact-right {}
+.contact-item {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contact-item:first-child { border-top: 1px solid var(--border); }
+.contact-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.contact-val {
+  font-family: var(--ff-e);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-val:hover { color: var(--accent); }
+
+footer {
+  padding: 2rem 3.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-sig {
+  font-family: var(--ff-d);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.footer-note {
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ── REVEAL ANIMATION ────────────────── */
+.r {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+}
+.r.vis { opacity: 1; transform: translateY(0); }
+.r.d1 { transition-delay: 0.1s; }
+.r.d2 { transition-delay: 0.2s; }
+.r.d3 { transition-delay: 0.3s; }
+
+/* ── RESPONSIVE ──────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+  .hero { padding: 0 1.5rem 2.5rem; }
+  .hero-name { left: 1.5rem; right: 1.5rem; }
+  section { padding: 4.5rem 1.5rem; }
+  .strip-section { padding: 0 1.5rem 4rem; }
+  .about-grid, .work-item { grid-template-columns: 1fr; gap: 2.5rem; }
+  .beyond-grid { grid-template-columns: 1fr; }
+  .contact-section { grid-template-columns: 1fr; gap: 3rem; }
+  .case-grid { grid-template-columns: 1fr; }
+  .photo-strip { grid-template-columns: repeat(2, 1fr); }
+  .photo-ph:nth-child(even) { margin-top: 0; }
+  footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav id="nav">
+  <!-- Replace "Y.N." with your initials -->
+  <a href="#" class="nav-logo">P.S.</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#beyond">Beyond</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" id="home">
+  <div class="hero-name">
+    <!--
+      REPLACE THESE TWO LINES with your first and last name.
+      If your name is short (e.g. "ARJUN MEHTA"), split as you like.
+      Keep it TWO lines for the editorial look.
+    -->
+    <div>PRIYAL</div>
+    <div>SHARMA</div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-left">
+      <div class="hero-role">Co-Founder · Builder · Analyst</div>
+      <p class="hero-tagline">
+        Building in tech and finance by day.<br>
+        Analyzing systems, people, and the future<br>
+        of intelligent technology by night.
+      </p>
+    </div>
+
+    <div class="badge">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="cp" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/>
+        </defs>
+        <text font-family="'DM Sans',sans-serif" font-size="9.5" fill="#555550" letter-spacing="2.5">
+          <textPath href="#cp">BUILDER · ANALYST · FOUNDER · BUILDER · ANALYST ·</textPath>
+        </text>
+      </svg>
+      <div class="badge-center">↓</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ABOUT ════════ -->
+<section id="about">
+  <div class="sec-label">About</div>
+  <h2 class="sec-title">The <em>Operator</em></h2>
+
+  <div class="about-grid">
+    <div class="about-photo r">
+             <img src="me.jpg" alt="PRIYAL SHARMA">
+             <div class="about-photo-label">
+              </div>
+    </div>
+
+    <div class="about-text">
+      <div class="pull-quote r">
+        "I like businesses with substance, people with perspective 
+and ideas that hold under pressure. Everything else is mostly noise"
+      </div>
+      <p class="r d1">
+        I operate at the intersection of systems thinking, product strategy,
+        and relentless execution. As a founder, I've learned that the distance
+        between vision and traction is almost always a people and operations
+        problem.
+      </p>
+      <p class="r d2">
+        From bootstrapping a marketing agency at 19 that crossed $108K in
+        revenue without external capital, to co-founding BYB — an automated
+        credit analyst platform for SMBs — I build things that solve structural
+        problems others haven't noticed yet.
+      </p>
+      <p class="r d3">
+        Based in India, operating globally. Currently thinking deeply about
+        where intelligent systems meet human capital.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WORK ════════ -->
+<section id="work">
+  <div class="sec-label">Work</div>
+  <h2 class="sec-title">Things I've <em>Built</em></h2>
+
+  <!-- BYB -->
+  <div class="work-item">
+    <div class="r">
+      <div class="work-company">BYB</div>
+      <span class="work-tag">2023 — Present</span>
+      <span class="work-tag">Co-Founder & CEO</span>
+    </div>
+
+    <div class="work-body r d1">
+      <p>
+        Today, SMBs generate more verifiable financial data than ever before —
+        but access to credit hasn't changed. BYB is an automated credit analyst
+        built to fix exactly that structural gap.
+      </p>
+      <p>
+        As co-founder and CEO, I operate across strategy, systems, and execution
+        simultaneously — leading acquisition planning, ecosystem partnerships,
+        product structuring, and investor-facing communication, while shaping
+        how the platform scales long-term.
+      </p>
+      <!--
+        REPLACE href below with your actual BYB URL
+        e.g. href="https://buildbyb.com"
+      -->
+      <a href="https://bybsystems.vercel.app/" target="_blank" rel="noopener" class="ext-link">
+        Visit BYB &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- EDIFY -->
+  <div class="work-item">
+    <div class="r">
+      <div class="work-company">Edify</div>
+      <span class="work-tag">2021 — 2023</span>
+      <span class="work-tag">Founder</span>
+    </div>
+
+    <div class="work-body r d1">
+      <p>
+        Built Edify Management at 19 with a laptop, two friends, and the belief
+        that marketing should do more than look good — it should solve, scale,
+        and create measurable impact.
+      </p>
+      <p>
+        What started through university networks evolved into a strategy-led
+        agency serving clients across India, the UK, and Canada, spanning
+        17+ industries from hospitality and FMCG to fashion and construction.
+      </p>
+
+      <div class="stats-row">
+        <div>
+          <div class="stat-num">75+</div>
+          <div class="stat-label">Clients Served</div>
+        </div>
+        <div>
+          <div class="stat-num">$108K</div>
+          <div class="stat-label">Revenue · No Capital</div>
+        </div>
+        <div>
+          <div class="stat-num">17+</div>
+          <div class="stat-label">Industries</div>
+        </div>
+        <div>
+          <div class="stat-num">10</div>
+          <div class="stat-label">Team Members</div>
+        </div>
+      </div>
+
+      <button class="case-btn" onclick="toggleCase(this)" aria-expanded="false">
+        <span class="arr">›</span>
+        <span>Read the Case Study</span>
+      </button>
+
+      <div class="case-wrap" role="region" aria-label="Edify Case Study">
+        <div class="case-inner">
+          <h3>Edify Management — <em>From a Campus to Three Continents</em></h3>
+          <p>
+            Edify was built on the thesis that SMBs were chronically underserved
+            by marketing — not because solutions didn't exist, but because strategy
+            was treated as a luxury. We built a productized, strategy-first model
+            that changed that.
+          </p>
+          <div class="case-grid">
+            <div class="case-block">
+              <h4>The Problem</h4>
+              <p>
+                Small businesses lacked access to strategy-first marketing. Agencies
+                either served enterprise clients or delivered execution-only work.
+                The middle market was ignored.
+              </p>
+            </div>
+            <div class="case-block">
+              <h4>The Approach</h4>
+              <p>
+                A productized service model — strategy-led, systems-backed,
+                metrics-driven. University networks seeded our first clients;
+                results fueled referral growth across three markets.
+              </p>
+            </div>
+            <div class="case-block">
+              <h4>How I Led It</h4>
+              <p>
+                Led acquisition, brand strategy, and operational structuring.
+                Built a 10-member team. Designed systems for long-term scale —
+                without external capital, without compromise.
+              </p>
+            </div>
+            <div class="case-block">
+              <h4>The Outcome</h4>
+              <p>
+                75+ clients across India, UK, and Canada. 17+ industries.
+                $108K in revenue. Zero external funding. Proof that execution
+                and discipline outlast capital.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PHOTO STRIP ════════ -->
+<div class="strip-section">
+  <div class="strip-label">Archive · Add your own photos below</div>
+  <div class="photo-strip">
+    <!--
+      TO ADD PHOTOS: replace each placeholder div with:
+      <div class="photo-ph"><img src="your-image.jpg" alt="description"></div>
+
+      Good photo choices: TEDx event, team photo, podcast recording, event shots.
+      Aim for 4 black-and-white or high-contrast images for the editorial look.
+    -->
+    <div class="photo-ph">
+      <img src="7.jpg" alt="TEDx">	
+    </div>
+    <div class="photo-ph">
+      <img src="8.jpg" alt="Podcast">
+    </div>
+    <div class="photo-ph">
+      <img src="Copy of podcasts posts.jpg" alt="Workshop">
+    </div>
+    <div class="photo-ph">
+       <img src="10.jpg" alt="Team / Edify">
+      <span>Team / Edify</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ JOURNEY ════════ -->
+<section id="journey">
+  <div class="sec-label">Journey</div>
+  <h2 class="sec-title">The <em>Roadmap</em></h2>
+
+  <div class="timeline">
+    <!--
+      ADJUST YEARS to match your actual timeline.
+    -->
+    <div class="tl-item r">
+      <div class="tl-year">2024</div>
+      <div class="tl-content">
+        <h3>Founded Edify Management</h3>
+        <p>
+          Started a strategy-led marketing agency at 19 with two friends and
+          a laptop. First clients came through university networks. The thesis:
+          marketing should solve, not just look good.
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-item r">
+      <div class="tl-year">2025</div>
+      <div class="tl-content">
+        <h3>Scale Without Capital</h3>
+        <p>
+          Edify grows to 75+ clients across 3 countries and 17+ industries.
+          Team expands to 10. $108K in revenue — no external funding, no
+          shortcuts, no excuses.
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-item r">
+      <div class="tl-year">2025</div>
+      <div class="tl-content">
+        <h3>TEDx &amp; The IISU Podcast</h3>
+        <p>
+          Sole organiser of a TEDx event. Initiated and hosted The IISU Podcast
+          — 75K+ impressions across socials. Began delivering workshops on
+          entrepreneurship and digital strategy at leading Indian universities.
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-item r">
+      <div class="tl-year">2026</div>
+      <div class="tl-content">
+        <h3>Co-Founded BYB</h3>
+        <p>
+          Identified a structural gap: SMBs generate more verifiable financial
+          data than ever, yet credit access hadn't evolved. BYB is built to
+          change that.
+        </p>
+      </div>
+    </div>
+
+    <div class="tl-item r">
+      <div class="tl-year">Now</div>
+      <div class="tl-content">
+        <h3>Building at the Frontier of Tech &amp; Finance</h3>
+        <p>
+          Leading BYB as CEO — shaping product, partnerships, and platform
+          strategy. Thinking about where intelligent systems transform access
+          to capital for the businesses that drive real economies.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ BEYOND ════════ -->
+<section id="beyond">
+  <div class="sec-label">Beyond</div>
+  <h2 class="sec-title">Ideas, <em>Community,</em> and Conversation</h2>
+
+  <div class="beyond-grid">
+    <div class="beyond-card r">
+      <div class="beyond-num">01</div>
+      <div class="beyond-title">TEDx Organiser</div>
+      <p>
+        Sole organiser of a TEDx event — handling everything from curation
+        to execution. Built a stage for ideas worth spreading. Because the
+        best events change how people think, not just what they know.
+      </p>
+    </div>
+
+    <div class="beyond-card r d1">
+      <div class="beyond-num">02</div>
+      <div class="beyond-title">The IISU Podcast</div>
+      <p>
+        Initiated and hosted The IISU Podcast. 75K+ impressions across
+        socials. Conversations at the intersection of ambition, technology,
+        and identity — for the builder who thinks differently.
+      </p>
+    </div>
+
+    <div class="beyond-card r d2">
+      <div class="beyond-num">03</div>
+      <div class="beyond-title">10+ University Workshops</div>
+      <p>
+        Delivered workshops on entrepreneurship and digital strategy across
+        leading Indian universities. Grew beyond titles. Created impact
+        designed to outlast intent.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT ════════ -->
+<section class="contact-section" id="contact">
+  <div class="contact-left r">
+    <div class="big-line">Let's<br>Talk.</div>
+    <p>
+      I'm always open to conversations about building, investing,
+      collaboration, or ideas that don't fit neatly into a box.
+    </p>
+  </div>
+
+  <div class="contact-right r d1">
+    <!--
+      REPLACE all placeholder values below with your real details.
+    -->
+    <div class="contact-item">
+      <span class="contact-label">Email</span>
+      <a href="mailto:priyalsharma2004@gmail.com" class="contact-val">priyalsharma2004@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">LinkedIn</span>
+      <a href="https://www.linkedin.com/in/priyalsharma2004/" target="_blank" rel="noopener" class="contact-val">@priyalsharma2004</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">BYB</span>
+      <a href="https://bybsystems.vercel.app/" target="_blank" rel="noopener" class="contact-val">bybsystems.com →</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Instagram</span>
+      <!-- Remove this block if you don't want Twitter listed -->
+      <a href="https://www.instagram.com/the.priyalsharma/" rel="noopener" class="contact-val">@the.priyalsharma</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <!-- Replace with your name -->
+  <div class="footer-sig">PRIYAL SHARMA</div>
+  <div class="footer-note">Building the future of intelligent finance</div>
+</footer>
+
+<!-- ════════ SCRIPTS ════════ -->
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('vis');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+  // Case study toggle
+  function toggleCase(btn) {
+    const wrap = btn.nextElementSibling;
+    const isOpen = wrap.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+    btn.querySelector('span:last-child').textContent =
+      isOpen ? 'Close Case Study' : 'Read the Case Study';
+  }
+</script>
+</body>
+</html>
