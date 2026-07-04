@@ -606,15 +606,38 @@ section {
 }
 .x-embed {
   min-height: 480px;
+  position: relative;
 }
-.x-embed .twitter-timeline {
+.x-embed iframe {
   border-radius: 0 !important;
 }
+.x-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
 .x-fallback {
-  font-size: 0.85rem;
-  color: var(--muted);
-  padding: 2rem 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  min-height: 480px;
+  border: 1px solid var(--border);
   text-align: center;
+  padding: 2rem;
+}
+.x-fallback .write-mark { color: var(--accent); }
+.x-fallback p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  max-width: 320px;
+  line-height: 1.7;
 }
 
 /* ── CONTACT / FOOTER ────────────────── */
@@ -748,7 +771,7 @@ footer {
 
   <div class="hero-bottom">
     <div class="hero-left">
-      <div class="hero-role">Founder · Builder · Analyst</div>
+      <div class="hero-role">Co-Founder · Builder · Analyst</div>
       <p class="hero-tagline">
         Building in tech and finance by day.<br>
         Analyzing systems, people, and the future<br>
@@ -947,6 +970,13 @@ and ideas that hold under pressure. Everything else is mostly noise"
     <div class="photo-ph">
       <img src="8.jpg" alt="Podcast">
     </div>
+    <div class="photo-ph">
+      <img src="Copy of podcasts posts.jpg" alt="Workshop">
+    </div>
+    <div class="photo-ph">
+       <img src="10.jpg" alt="Team / Edify">
+      <span>Team / Edify</span>
+    </div>
   </div>
 </div>
 
@@ -1121,13 +1151,16 @@ and ideas that hold under pressure. Everything else is mostly noise"
         Follow along &rarr;
       </a>
     </div>
-    <div class="x-embed">
-      <a class="twitter-timeline" data-theme="dark" data-chrome="noheader nofooter noborders transparent" data-height="480" href="https://twitter.com/thepriyalsharma?ref_src=twsrc%5Etfw">
-        Tweets by thepriyalsharma
-      </a>
-      <noscript>
-        <div class="x-fallback">Enable JavaScript to see the live feed, or visit the profile directly.</div>
-      </noscript>
+    <div class="x-embed" id="x-embed">
+      <div class="x-loading" id="x-loading">Loading the feed…</div>
+      <div id="x-timeline-target"></div>
+      <div class="x-fallback" id="x-fallback">
+        <div class="write-mark">𝕏</div>
+        <p>The live embed didn't load this time. The feed is best viewed directly on X.</p>
+        <a href="https://x.com/thepriyalsharma" target="_blank" rel="noopener" class="ext-link">
+          View on X &rarr;
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -1178,7 +1211,6 @@ and ideas that hold under pressure. Everything else is mostly noise"
 </footer>
 
 <!-- ════════ SCRIPTS ════════ -->
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
   // Nav scroll
   const nav = document.getElementById('nav');
@@ -1206,6 +1238,54 @@ and ideas that hold under pressure. Everything else is mostly noise"
     btn.querySelector('span:last-child').textContent =
       isOpen ? 'Close Case Study' : 'Read the Case Study';
   }
+
+  // ── X: live timeline, loaded and verified programmatically ──
+  // Rather than dropping a raw <a class="twitter-timeline"> and hoping the
+  // script converts it in time (which can render as a bare link if the
+  // conversion doesn't fire), this loads widgets.js itself, then calls
+  // twttr.widgets.createTimeline() directly and only shows the result once
+  // it actually succeeds. Anything short of a real rendered feed shows the
+  // matching styled fallback card instead of a broken-looking link.
+  (function loadXTimeline() {
+    const loadingEl = document.getElementById('x-loading');
+    const targetEl = document.getElementById('x-timeline-target');
+    const fallbackEl = document.getElementById('x-fallback');
+    let settled = false;
+
+    function showFallback() {
+      if (settled) return;
+      settled = true;
+      loadingEl.style.display = 'none';
+      targetEl.style.display = 'none';
+      fallbackEl.style.display = 'flex';
+    }
+
+    function showTimeline() {
+      if (settled) return;
+      settled = true;
+      loadingEl.style.display = 'none';
+    }
+
+    // Safety net: if nothing has resolved within 8s, fall back gracefully.
+    const timeout = setTimeout(showFallback, 8000);
+
+    const script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    script.async = true;
+    script.onerror = () => { clearTimeout(timeout); showFallback(); };
+    script.onload = () => {
+      if (!window.twttr || !window.twttr.widgets) { clearTimeout(timeout); showFallback(); return; }
+      window.twttr.widgets.createTimeline(
+        { sourceType: 'profile', screenName: 'thepriyalsharma' },
+        targetEl,
+        { theme: 'dark', chrome: 'noheader nofooter noborders transparent', height: 480 }
+      ).then((el) => {
+        clearTimeout(timeout);
+        if (el) { showTimeline(); } else { showFallback(); }
+      }).catch(() => { clearTimeout(timeout); showFallback(); });
+    };
+    document.head.appendChild(script);
+  })();
 
   // ── Substack: latest post fetch ──
   // Uses rss2json.com as a free CORS-friendly proxy for Substack's RSS feed.
