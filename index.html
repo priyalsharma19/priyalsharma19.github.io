@@ -331,6 +331,7 @@ section {
   border: 1px solid var(--dim);
   padding: 0.75rem 1.5rem;
   margin-top: 0.5rem;
+  margin-right: 0.75rem;
   transition: border-color 0.2s, color 0.2s;
 }
 .ext-link:hover { border-color: var(--accent); color: var(--accent); }
@@ -400,7 +401,8 @@ section {
   line-height: 1.75;
 }
 
-/* ── PHOTO STRIP ─────────────────────── */
+
+/* ── PHOTO STRIP (headshot only now) ─── */
 .strip-section {
   padding: 0 3.5rem 5rem;
   border-top: none;
@@ -531,6 +533,90 @@ section {
   line-height: 1.78;
 }
 
+/* ── SKILLS ──────────────────────────── */
+.skills-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem 4rem;
+}
+.skill-row h4 {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.skill-row p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ── WRITING / SUBSTACK ──────────────── */
+.write-card {
+  border: 1px solid var(--dim);
+  background: var(--surface);
+  padding: 2.75rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+.write-mark {
+  font-family: var(--ff-d);
+  font-size: 2.2rem;
+  color: var(--accent);
+  line-height: 1;
+}
+.write-title {
+  font-family: var(--ff-e);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--fg);
+}
+.write-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.write-meta {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 0.75rem;
+}
+
+/* ── X / BUILDING IN PUBLIC ──────────── */
+.x-card {
+  border: 1px solid var(--dim);
+  background: var(--surface);
+  padding: 2rem;
+}
+.x-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.x-card-head p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  max-width: 420px;
+}
+.x-embed {
+  min-height: 480px;
+}
+.x-embed .twitter-timeline {
+  border-radius: 0 !important;
+}
+.x-fallback {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 2rem 0;
+  text-align: center;
+}
+
 /* ── CONTACT / FOOTER ────────────────── */
 .contact-section {
   padding: 5rem 3.5rem;
@@ -620,10 +706,13 @@ footer {
   .strip-section { padding: 0 1.5rem 4rem; }
   .about-grid, .work-item { grid-template-columns: 1fr; gap: 2.5rem; }
   .beyond-grid { grid-template-columns: 1fr; }
+  .skills-list { grid-template-columns: 1fr; gap: 2rem; }
   .contact-section { grid-template-columns: 1fr; gap: 3rem; }
   .case-grid { grid-template-columns: 1fr; }
   .photo-strip { grid-template-columns: repeat(2, 1fr); }
   .photo-ph:nth-child(even) { margin-top: 0; }
+  .write-card { grid-template-columns: 1fr; text-align: left; }
+  .x-card-head { flex-direction: column; align-items: flex-start; gap: 1rem; }
   footer { flex-direction: column; gap: 0.75rem; text-align: center; }
 }
 </style>
@@ -637,7 +726,10 @@ footer {
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#journey">Journey</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#beyond">Beyond</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#building">X</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -656,7 +748,7 @@ footer {
 
   <div class="hero-bottom">
     <div class="hero-left">
-      <div class="hero-role">Co-Founder · Builder · Analyst</div>
+      <div class="hero-role">Founder · Builder · Analyst</div>
       <p class="hero-tagline">
         Building in tech and finance by day.<br>
         Analyzing systems, people, and the future<br>
@@ -702,14 +794,14 @@ and ideas that hold under pressure. Everything else is mostly noise"
         problem.
       </p>
       <p class="r d2">
-        From bootstrapping a marketing agency at 19 that crossed $108K in
-        revenue without external capital, to co-founding BYB — an automated
-        credit analyst platform for SMBs — I build things that solve structural
-        problems others haven't noticed yet.
+        From bootstrapping a marketing consultancy at 19 that crossed $108K in
+        revenue without external capital, to building BYB, the financial brain
+        for private companies, I find the structural problems others walk
+        past and build what should have existed already.
       </p>
       <p class="r d3">
-        Based in India, operating globally. Currently thinking deeply about
-        where intelligent systems meet human capital.
+        Based in India, operating globally. Currently thinking about what
+        private company finance looks like when it stops being reactive.
       </p>
     </div>
   </div>
@@ -725,26 +817,24 @@ and ideas that hold under pressure. Everything else is mostly noise"
     <div class="r">
       <div class="work-company">BYB</div>
       <span class="work-tag">2026 — Present</span>
-      <span class="work-tag">Co-Founder & CEO</span>
+      <span class="work-tag">Founder & CEO</span>
     </div>
 
     <div class="work-body r d1">
       <p>
-        Today, SMBs generate more verifiable financial data than ever before —
-        but access to credit hasn't changed. BYB is an automated credit analyst
-        built to fix exactly that structural gap.
+        Private companies employ most of the world's workforce and still run
+        on financial infrastructure built for a different century. BYB is the
+        intelligence layer they have never had. The product embeds inside a
+        company's financial data, learns how that specific business runs,
+        and tells the owner what matters before they have to ask.
       </p>
       <p>
-        As co-founder and CEO, I operate across strategy, systems, and execution
-        simultaneously — leading acquisition planning, ecosystem partnerships,
-        product structuring, and investor-facing communication, while shaping
-        how the platform scales long-term.
+        It is not a dashboard someone interrogates, and it is not a chatbot
+        wrapped around someone else's model. The brain speaks first. I lead
+        product and strategy end to end, work hands-on in the build, and run
+        the fundraising conversations in parallel.
       </p>
-      <!--
-        REPLACE href below with your actual BYB URL
-        e.g. href="https://buildbyb.com"
-      -->
-      <a href="https://bybsystems.vercel.app/" target="_blank" rel="noopener" class="ext-link">
+      <a href="https://byb-waitlist.vercel.app/" target="_blank" rel="noopener" class="ext-link">
         Visit BYB &rarr;
       </a>
     </div>
@@ -760,9 +850,9 @@ and ideas that hold under pressure. Everything else is mostly noise"
 
     <div class="work-body r d1">
       <p>
-        Built Edify Management at 19 with a laptop, two friends, and the belief
-        that marketing should do more than look good — it should solve, scale,
-        and create measurable impact.
+        Built Edify Management at 19 with a laptop, a Wix website, and the
+        belief that marketing should do more than look good. It should
+        solve, scale, and create measurable impact.
       </p>
       <p>
         What started through university networks evolved into a strategy-led
@@ -788,6 +878,10 @@ and ideas that hold under pressure. Everything else is mostly noise"
           <div class="stat-label">Team Members</div>
         </div>
       </div>
+
+      <a href="https://managementedify.wixstudio.com/mysite" target="_blank" rel="noopener" class="ext-link">
+        Visit Edify &rarr;
+      </a>
 
       <button class="case-btn" onclick="toggleCase(this)" aria-expanded="false">
         <span class="arr">›</span>
@@ -847,25 +941,11 @@ and ideas that hold under pressure. Everything else is mostly noise"
 <div class="strip-section">
   <div class="strip-label"> Glimpses </div>
   <div class="photo-strip">
-    <!--
-      TO ADD PHOTOS: replace each placeholder div with:
-      <div class="photo-ph"><img src="your-image.jpg" alt="description"></div>
-
-      Good photo choices: TEDx event, team photo, podcast recording, event shots.
-      Aim for 4 black-and-white or high-contrast images for the editorial look.
-    -->
     <div class="photo-ph">
       <img src="7.jpg" alt="TEDx">	
     </div>
     <div class="photo-ph">
       <img src="8.jpg" alt="Podcast">
-    </div>
-    <div class="photo-ph">
-      <img src="Copy of podcasts posts.jpg" alt="Workshop">
-    </div>
-    <div class="photo-ph">
-       <img src="10.jpg" alt="Team / Edify">
-      <span>Team / Edify</span>
     </div>
   </div>
 </div>
@@ -920,9 +1000,9 @@ and ideas that hold under pressure. Everything else is mostly noise"
       <div class="tl-content">
         <h3>Founded BYB</h3>
         <p>
-          Identified a structural gap: SMBs generate more verifiable financial
-          data than ever, yet credit access hadn't evolved. BYB is built to
-          change that.
+          Identified a structural gap that has been open for 90 years.
+          Private companies run on recording systems, not intelligence
+          systems. BYB is the layer that changes that.
         </p>
       </div>
     </div>
@@ -932,14 +1012,46 @@ and ideas that hold under pressure. Everything else is mostly noise"
       <div class="tl-content">
         <h3>Building at the Frontier of Tech &amp; Finance</h3>
         <p>
-          Leading BYB as CEO — shaping product, partnerships, and platform
-          strategy. Thinking about where intelligent systems transform access
-          to capital for the businesses that drive real economies.
+          Leading BYB as founder and CEO, shaping product and strategy end
+          to end, running fundraising conversations, and building in public.
+          Thinking about what the financial brain for private companies
+          looks like at scale.
         </p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ════════ SKILLS ════════ -->
+<section id="skills">
+  <div class="sec-label">Skills</div>
+  <h2 class="sec-title">What I Bring to <em>the Table</em></h2>
+
+  <!--
+    EDIT THIS: four operator-level capabilities pulled from what you've
+    actually run (BYB's build process, Edify's scale-up). Adjust the copy
+    in each <p> if anything doesn't fit.
+  -->
+  <div class="skills-list">
+    <div class="skill-row r">
+      <h4>Product & Systems Strategy</h4>
+      <p>Structuring a financial intelligence product from first principles — architecture, scope, and roadmap sequencing, not templated features.</p>
+    </div>
+    <div class="skill-row r d1">
+      <h4>AI-Assisted Development</h4>
+      <p>Building and shipping in the codebase with Claude Code, Cursor, and other AI tooling, iterating fast without waiting for permission or outside help.</p>
+    </div>
+    <div class="skill-row r d2">
+      <h4>Financial Modeling & Analysis</h4>
+      <p>Reading a company's numbers closely enough to design a system that reasons about cash flow, receivables, and cost patterns on its own.</p>
+    </div>
+    <div class="skill-row r">
+      <h4>Growth & Distribution</h4>
+      <p>Building audience and positioning from zero across two companies — content-led, narrative-first, no paid acquisition.</p>
+    </div>
+  </div>
+</section>
+
 
 <!-- ════════ BEYOND ════════ -->
 <section id="beyond">
@@ -979,6 +1091,47 @@ and ideas that hold under pressure. Everything else is mostly noise"
   </div>
 </section>
 
+<!-- ════════ WRITING / SUBSTACK ════════ -->
+<section id="writing">
+  <div class="sec-label">Writing</div>
+  <h2 class="sec-title">From the <em>Substack</em></h2>
+
+  <div class="write-card r">
+    <div class="write-mark">¶</div>
+    <div>
+      <div class="write-title" id="substack-title">Loading latest post…</div>
+      <div class="write-desc" id="substack-desc">Fetching the newest note from Substack.</div>
+      <div class="write-meta" id="substack-meta"></div>
+    </div>
+    <a href="https://substack.com/@frompriyal" target="_blank" rel="noopener" class="ext-link">
+      Read on Substack &rarr;
+    </a>
+  </div>
+</section>
+
+<!-- ════════ X / BUILDING IN PUBLIC ════════ -->
+<section id="building">
+  <div class="sec-label">Building in Public</div>
+  <h2 class="sec-title">Live on <em>X</em></h2>
+
+  <div class="x-card r">
+    <div class="x-card-head">
+      <p>The day-to-day of building BYB and Vidur — shipped features, dead ends, and the occasional rant, posted as it happens.</p>
+      <a href="https://x.com/thepriyalsharma" target="_blank" rel="noopener" class="ext-link">
+        Follow along &rarr;
+      </a>
+    </div>
+    <div class="x-embed">
+      <a class="twitter-timeline" data-theme="dark" data-chrome="noheader nofooter noborders transparent" data-height="480" href="https://twitter.com/thepriyalsharma?ref_src=twsrc%5Etfw">
+        Tweets by thepriyalsharma
+      </a>
+      <noscript>
+        <div class="x-fallback">Enable JavaScript to see the live feed, or visit the profile directly.</div>
+      </noscript>
+    </div>
+  </div>
+</section>
+
 <!-- ════════ CONTACT ════════ -->
 <section class="contact-section" id="contact">
   <div class="contact-left r">
@@ -990,9 +1143,6 @@ and ideas that hold under pressure. Everything else is mostly noise"
   </div>
 
   <div class="contact-right r d1">
-    <!--
-      REPLACE all placeholder values below with your real details.
-    -->
     <div class="contact-item">
       <span class="contact-label">Email</span>
       <a href="mailto:priyalsharma2004@gmail.com" class="contact-val">priyalsharma2004@gmail.com</a>
@@ -1002,12 +1152,19 @@ and ideas that hold under pressure. Everything else is mostly noise"
       <a href="https://www.linkedin.com/in/priyalsharma2004/" target="_blank" rel="noopener" class="contact-val">@priyalsharma2004</a>
     </div>
     <div class="contact-item">
+      <span class="contact-label">X</span>
+      <a href="https://x.com/thepriyalsharma" target="_blank" rel="noopener" class="contact-val">@thepriyalsharma</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">GitHub</span>
+      <a href="https://github.com/priyalsharma19" target="_blank" rel="noopener" class="contact-val">@priyalsharma19</a>
+    </div>
+    <div class="contact-item">
       <span class="contact-label">BYB</span>
-      <a href="https://bybsystems.vercel.app/" target="_blank" rel="noopener" class="contact-val">bybsystems.com →</a>
+      <a href="https://byb-waitlist.vercel.app/" target="_blank" rel="noopener" class="contact-val">byb-waitlist.vercel.app →</a>
     </div>
     <div class="contact-item">
       <span class="contact-label">Instagram</span>
-      <!-- Remove this block if you don't want Twitter listed -->
       <a href="https://www.instagram.com/the.priyalsharma/" rel="noopener" class="contact-val">@the.priyalsharma</a>
     </div>
   </div>
@@ -1017,10 +1174,11 @@ and ideas that hold under pressure. Everything else is mostly noise"
 <footer>
   <!-- Replace with your name -->
   <div class="footer-sig">PRIYAL SHARMA</div>
-  <div class="footer-note">Building the future of intelligent finance</div>
+  <div class="footer-note">Building the financial brain for private companies.</div>
 </footer>
 
 <!-- ════════ SCRIPTS ════════ -->
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
   // Nav scroll
   const nav = document.getElementById('nav');
@@ -1048,6 +1206,38 @@ and ideas that hold under pressure. Everything else is mostly noise"
     btn.querySelector('span:last-child').textContent =
       isOpen ? 'Close Case Study' : 'Read the Case Study';
   }
+
+  // ── Substack: latest post fetch ──
+  // Uses rss2json.com as a free CORS-friendly proxy for Substack's RSS feed.
+  // If it fails (rate limit, network, etc.) the card falls back to a static line.
+  (function loadSubstack() {
+    const titleEl = document.getElementById('substack-title');
+    const descEl = document.getElementById('substack-desc');
+    const metaEl = document.getElementById('substack-meta');
+    const feedUrl = 'https://frompriyal.substack.com/feed';
+    const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedUrl);
+
+    fetch(proxyUrl)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.items && data.items.length) {
+          const latest = data.items[0];
+          const plain = (latest.description || '').replace(/<[^>]*>/g, '').trim();
+          const snippet = plain.length > 160 ? plain.slice(0, 160).trim() + '…' : plain;
+          const date = new Date(latest.pubDate);
+          titleEl.textContent = latest.title || 'New post on Substack';
+          descEl.textContent = snippet || 'Read the full piece on Substack.';
+          metaEl.textContent = isNaN(date) ? '' : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        } else {
+          throw new Error('No items');
+        }
+      })
+      .catch(() => {
+        titleEl.textContent = 'New writing, regularly';
+        descEl.textContent = 'Notes on building, systems, and everything that doesn\'t fit neatly into a box.';
+        metaEl.textContent = '';
+      });
+  })();
 </script>
 </body>
 </html>
